@@ -9,10 +9,26 @@ jobs:
     - name: Run a one-line script
       run: "echo Hello, world!"
 
-  deploy-stage:
+  deploy-stage-scf:
     runs-on: ubuntu-latest
     environment: staging
     needs: [build]
     steps:
     - name: Deploy
       run: echo "Deploying staging"      
+
+  deploy-stage-pf:
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: [build]
+    steps:
+    - name: Deploy
+      run: echo "Deploying staging"   
+
+  deploy-prod-scf:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [deploy-stage-scf]
+    steps:
+    - name: Deploy
+      run: echo "Deploying prod"   
